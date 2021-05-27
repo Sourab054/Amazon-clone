@@ -5,14 +5,14 @@ import ProductFeed from "../components/ProductFeed";
 
 export default function Home({ products }) {
   return (
-    <div className="bg-gray-100">
+    <div className="bg-amazon_blue-light">
       <Head>
         <title>Amazon 2.0</title>
       </Head>
 
       <Header />
 
-      <main className="max-w-screen-xl mx-auto">
+      <main className="max-w-screen-2xl mx-auto">
         {/* Banner */}
         <Banner />
 

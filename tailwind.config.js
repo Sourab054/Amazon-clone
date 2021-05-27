@@ -9,8 +9,12 @@ module.exports = {
     extend: {
       colors: {
         amazon_blue: {
-          light: "#232F3E",
-          DEFAULT: "#131921",
+          light: "#daddd8",
+          DEFAULT: "#1c1c1c",
+        },
+        nav: {
+          navbar: "#eef0f2",
+          product: "#fafaff",
         },
       },
     },

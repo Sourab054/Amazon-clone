@@ -3,12 +3,35 @@ import CheckoutProduct from "../components/CheckoutProduct";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { selectItems, selectTotal } from "../slices/basketSlice";
-import { session } from "next-auth/client";
+import { useSession } from "next-auth/client";
 import Currency from "react-currency-formatter";
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
+
+const stripePromise = loadStripe(process.env.stripe_public_key);
 
 function Checkout() {
   const items = useSelector(selectItems);
   const total = useSelector(selectTotal);
+  const [session] = useSession();
+
+  const createCheckoutSession = async () => {
+    const stripe = await stripePromise;
+
+    //call to back-end to create a checkout session
+    const checkoutSession = await axios.post("/api/create-checkout-session", {
+      items: items,
+      email: session.user.email,
+    });
+
+    //Redirecting
+    const result = await stripe.redirectToCheckout({
+      sessionId: checkoutSession.data.id,
+    });
+    if (result.error) {
+      alert(result.error.message);
+    }
+  };
 
   return (
     <div className="bg-gray-50">
@@ -27,12 +50,12 @@ function Checkout() {
           <div className="flex flex-col p-5 space-y-10 bg-white">
             <h1 className="text-3xl font-semibold border-b pb-4">
               {items.length === 0
-                ? "Your Shopping Cart is empty. "
+                ? `Your Shopping Cart is empty.`
                 : "Shopping Cart"}
             </h1>
             {items.map((item, i) => (
               <CheckoutProduct
-                key={i}
+                key={item.id}
                 id={item.id}
                 rating={item.rating}
                 title={item.title}
@@ -57,10 +80,12 @@ function Checkout() {
               </h2>
 
               <button
+                role="link"
+                onClick={createCheckoutSession}
                 disabled={!session}
-                className={`button text-base mt-2${
+                className={`button text-base my-4 ${
                   !session &&
-                  "from-gray-300 to-gray-500 border-gray-300 text-white cursor-not-allowed"
+                  "from-gray-300 to-gray-500 border-gray-300 text-gray-200 cursor-not-allowed"
                 }`}
               >
                 {!session ? "Sign in to checkout" : "Proceed for payment"}

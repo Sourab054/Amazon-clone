@@ -22,7 +22,7 @@ function Product({ id, title, price, description, category, image }) {
   };
 
   return (
-    <div className="relative flex flex-col m-5 bg-white p-10 z-30 shadow-2xl">
+    <div className="relative flex flex-col m-5 rounded-md bg-nav-product p-10 z-30 shadow-2xl">
       <p className="absolute top-2 right-2 capitalize text-sm italic text-gray-400">
         {category}
       </p>

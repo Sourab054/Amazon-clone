@@ -40,7 +40,10 @@ function Header() {
             <p>{session ? `Hello, ${session.user.name}` : "Sign in"}</p>
             <p className="font-extrabold md:text-sm">Accounts</p>
           </div>
-          <div className="link">
+          <div
+            className="link"
+            onClick={() => session && router.push("/orders")}
+          >
             <p>Returns</p>
             <p className="font-extrabold md:text-sm">& Orders</p>
           </div>
@@ -59,12 +62,12 @@ function Header() {
         </div>
       </div>
       {/* Bottom Nav */}
-      <div className="flex items-center space-x-3 p-2 pl-6 bg-amazon_blue-light text-white">
+      <div className="text-xs md:text-sm flex items-center space-x-3 p-2 pl-6 bg-nav-navbar text-black">
         <p className="link flex items-center">
           <MenuIcon className="mr-1 h-6" />
           All
         </p>
-        <p className="link ">Prime Video</p>
+        <p className="link">Prime Video</p>
         <p className="link">Amazon Play</p>
         <p className="link">Today's Deals</p>
         <p className="link hidden lg:inline">Electronics</p>
