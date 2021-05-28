@@ -62,7 +62,7 @@ function Header() {
         </div>
       </div>
       {/* Bottom Nav */}
-      <div className="text-xs md:text-sm flex items-center space-x-3 p-2 pl-6 bg-nav-navbar text-black">
+      <div className="flex items-center space-x-3 p-2 pl-6 bg-nav-navbar text-black">
         <p className="link flex items-center">
           <MenuIcon className="mr-1 h-6" />
           All
