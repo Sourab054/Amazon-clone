@@ -31,6 +31,7 @@ function Header() {
         <div className="hidden sm:flex items-center rounded-md cursor-pointer h-10 flex-grow bg-yellow-400 hover:bg-yellow-500 ">
           <input
             type="text"
+            placeholder="Search..."
             className="p-2 h-full flex-grow rounded-l-md focus:outline-none px-4"
           />
           <SearchIcon className="h-12 p-4" />
